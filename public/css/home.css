@@ -1,0 +1,62 @@
+#msg_div {
+  background-color: darkgoldenrod;
+  width: auto;
+  height: 400px;
+  padding: 10px;
+  margin: 6px 6px 2px 4px;
+  border-radius: 0.8pc;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+.center {
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+}
+.left {
+  float: left;
+  clear: both;
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+}
+.right {
+  float: right;
+  margin: auto;
+  clear: both;
+  width: 50%;
+  padding: 10px;
+}
+
+#top {
+  background-color: burlywood;
+  width: auto;
+  padding: 10px;
+  margin: 3px;
+  border-radius: 0.8pc;
+}
+.msg {
+  background-color: bisque;
+  font-size: large;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  width: 40%;
+  padding: 3px;
+  margin-top: 10px;
+  border-radius: 0.3pc;
+}
+#form {
+  width: 100%;
+  margin-top: 0px;
+  padding: 2px;
+}
+#input {
+  width: 88%;
+  border-radius: 0.3pc;
+  height: 40px;
+  margin-left: 2px;
+}
+#submit {
+  width: 11%;
+  height: 40px;
+  border-radius: 0.3pc;
+}
