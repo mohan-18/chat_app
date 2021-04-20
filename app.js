@@ -1,7 +1,7 @@
-const { Socket } = require('dgram');
 var express=require('express');
 var http = require('http');
 var socketio=require('socket.io')
+const {userJoin,getCurrentUser}=require('./utils/users')
 
 
 var app=express(); 
@@ -10,21 +10,30 @@ var server=http.createServer(app);
 var io= socketio(server);
 
 
-app.get('/',(req,res)=> {
+app.get('/chat',(req,res)=> {
     res.render("home.ejs")
+})
+app.get('/',(req,res)=> {
+    res.render("index.ejs")
 })
 
 io.on('connection',(socket)=>{
-    console.log('a user connected');
-    socket.broadcast.emit('message','A user has joined','center');
-    socket.emit('message','Welcome','center');
-    socket.on('disconnect',()=>console.log('User Disconnected'))
+    socket.on('joinRoom',(username,room)=>{
+        const user=userJoin(socket.id,username,room);
+         socket.join(user.room)
+        socket.broadcast.to(user.room).emit('message',`${user.username} has joined`,'center',user.username);
+        socket.emit('message',`Welcome ${user.username}`,'center',user.username);
+    })
+    
+    
     socket.on('chat_msg_all',(msg,pos)=>{
-        socket.broadcast.emit('message',msg,pos);
+        const user=getCurrentUser(socket.id);
+        socket.broadcast.to(user.room).emit('message',msg,pos,user.username);
     })
     socket.on('chat_msg_himself',(msg,pos)=>{
-        socket.emit('message',msg,pos);
+        socket.emit('message',msg,pos,"");
     })
+    socket.on('disconnect',()=>console.log('User Disconnected'))
 })
 
 
