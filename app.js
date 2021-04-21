@@ -2,6 +2,7 @@ var express=require('express');
 var http = require('http');
 var socketio=require('socket.io')
 const {userJoin,getCurrentUser}=require('./utils/users')
+const PORT = process.env.PORT||3000;
 
 
 var app=express(); 
@@ -38,4 +39,4 @@ io.on('connection',(socket)=>{
 
 
 
-server.listen(3000,()=> console.log("Server Running at 3000"));
+server.listen(PORT,()=> console.log("Server Running at 3000"));
