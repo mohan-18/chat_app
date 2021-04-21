@@ -34,9 +34,10 @@ io.on('connection',(socket)=>{
     socket.on('chat_msg_himself',(msg,pos)=>{
         socket.emit('message',msg,pos,"");
     })
-    socket.on('disconnect',()=>console.log('User Disconnected'))
+    socket.on('disconnect',()=>{
+        const user=getCurrentUser(socket.id);
+        socket.broadcast.to(user.room).emit('message',`${user.username} has left the room`,'center',"");
+    })
 })
-
-
-
+ 
 server.listen(PORT,()=> console.log("Server Running at 3000"));
